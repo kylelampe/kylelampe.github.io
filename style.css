@@ -1,0 +1,58 @@
+body {
+	padding: 0px;
+	margin: 0px;
+	font: 18px MS euphemia;
+	color: #000066;
+//red green blue
+}
+div#foot, div#head, div#wrapper {
+	width: 1000px;
+	clear:both;
+	position: relative;
+	background-color: #fff;
+}
+div#wrapper {
+	margin: 0px auto 10px auto;
+	border: 0;
+}
+/** Header content starts here **/
+div#head {
+	left:0px;
+	height:435px;
+	top: 0px 0px ;
+	vertical-align:baseline;
+}
+div#head ul 
+{
+ 	background-color:#fff;
+ 	color:#666;
+	padding: 30px 30px ;
+	margin: 0 0;
+
+	font: 18px MS euphemia ;
+	font-weight:bold;
+	font-variant: small-caps;
+}
+div#head li {
+	list-style: none;
+	margin: 0;
+	display: block;
+	float:left;
+	width: 25%;
+	text-align:center;
+}
+
+/** Body content starts here **/
+div#mission, div#inspiration, div#contact, div#team{
+	text-align: center;
+	#width: 80%;
+	font: 28px MS euphemia;
+	color:#666;
+	padding: 50px 100px 50px 100px;
+}
+div#contact{
+	background: #6699cc;
+	color:#fff;
+}
+
+
