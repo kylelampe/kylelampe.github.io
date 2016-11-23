@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Victory Parade Software</title>
+
+<link rel="stylesheet" type="text/css" href="style.css" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script >
+$(document).ready(function(){
+	$(document).scroll(function() {
+    	if( $(this).scrollTop() > 300 ) {$("#topbar").css("opacity", "1");}
+    	else {$("#topbar").css("opacity", '.4');}
+ 	});
+ 	
+	$(document).click(
+		function(){
+			if ($("biobox").css('display') != 'none') {
+				$("#biobox").hide();
+			}		
+		}
+	);
+	$(".teampic").click(
+        function () {
+        	var id = $(this).attr('id');
+        	//Change color behind photo
+        	$(".teampic").removeClass("selected");
+        	$(this).addClass("selected");
+        	//Change out bio text
+        	
+            $(".bio").hide();
+            $("#biobox").show();
+            $("#"+id+"bio").show();
+            event.stopPropagation();
+            //$("#chooseCompetition").show();
+
+            //$("#competition").hide();
+        }
+    );
+    $("#biobox").click(
+    	function () {$(this).hide();}
+    );
+})
+</script>
+
+</head>
+<body>
+
+<div id="wrapper">
+<div id="head">
+	<div id="topbar">
+	<div id="topname">Victory Parade</div>
+	<ul>
+		<!--<li>Victory Parade</li>-->
+		<!--<li><a href="#mission">MISSION</a></li>-->
+		<li><a href="#mission">Mission</a></li>
+		<li><a href="#team">Team</a></li>
+		<li><a href="#contact">Contact</a></li>
+	<!-- 	<li><a onclick="swapDiv('boomer')">Boomer</a></li> -->
+	</ul>
+	</div>
+	<img alt="" src="images/logo_original.png">
+		
+</div>
+<div id="mission">
+
+Victory Parade's mission is to improve health outcomes for equine athletes by utilizing the latest computer vision and machine learning techniques.
+<p/>
+<h3>About us:</h3>
+We've assembled an impressive team of computer vision experts, veterinarians, technologists, and investors to help bring about a technological revolution in equine health care.
+<p/>
+In the 1880's Eadweard Muybridge used recent technological advances to answer questions about the gait of a horse at a gallop.  We're doing the same, bringing new insights and ways to analyze equine movement.
+
+</div>
+<!--
+<div id="inspiration">
+<h2>Our Inspiration:</h2>
+While Rachel was a vet student at the Royal Veterinary College in England, she watched
+100ds of lameness exams, and saw gold standard objective analysis.  force plates.
+fancy qualysis cameras.  She came home and heard bout Kyle an the Kinnect, and envisoned
+a better world for horses, combining their lives.  And thus Victory parade software was formed.
+</div> -->
+<div id="team">
+<h2>The Team:</h2>
+	<div id="teampics">
+	 <div id="kyle" class="teampic selected" >
+		 <img src="images/kyle.jpg" >
+		 <span class="name">Kyle Lampe</span>
+		 <span class="title">Co-founder, CEO</span>
+	 </div>
+	 <div id="rachel" class="teampic">
+		 <img src="images/rachel.jpg" >
+		 <span class="name">Dr. Rachel Lampe</span>
+		 <span class="title">Co-founder, chief veterinary officer</span>
+	 </div>
+	 <div id="mark" class="teampic">
+		 <img src="images/mark.jpg" >
+		 <span class="name">Dr. Mark Revenaugh</span>
+		 <span class="title">Veterinary advisor</span>
+	 </div>
+	 <br/>
+	 <div id="andrey" class="teampic">
+		 <img src="images/andrey.jpg" >
+		 <span class="name">Andrey Skylar</span>
+		 <span class="title">Machine learning developer</span>
+	 </div>
+	 <div id="ryan" class="teampic">
+		 <img src="images/ryan.jpg" >
+		 <span class="name">Ryan</span>
+		 <span class="title">Lead signal analysis</span>
+	 </div>
+	 <div id="david" class="teampic">
+		 <img src="images/david.png" >
+		 <span class="name">David Vaskevitch</span>
+		 <span class="title">Technical advisor</span>
+	 </div>
+	   
+  </div>
+	<div id="biobox" style="display: none;">	
+		<div id="kylebio" class="bio" >
+		Kyle Lampe, Co-founder and CEO.
+<p/>		Kyle is the co-founder and CEO of Victory Parade.  Kyle's software career started early, at the age of 16 interning at Microsoft.  After receiving a degree in physics from Harvey Mudd College, he joined Microsoft full time eventually led a team of developers on Windows Mobile.  Feeling the startup itch, he left to lead development teams at Zumobi and SnapIn (which was acquired by Nuance).  Returning to Microsoft, Kyle's work began with 3-d cameras as the lead developer on Kinect Sesame Street TV.  He was also the lead developer for the Xbox video editing and sharing platform Upload Studio.
+	</div>
+
+		<div id="rachelbio" class="bio" style="display: none;">
+		Rachel is the co-founder and Chief Veterinary Officer of Victory Parade.
+		She grew up riding horses and competed nationally on the hunter-jumper show circuit.
+		Her first degree was in computer engineering at Tufts University.  After 5 years
+		working in software, she went back to school to become a veterinarian, at the Royal
+		Veterinary College in London.  Summer research during school involved analyzing mouse gaits, building a mouse treadmill, and running horses on treadmills, which inspired some of the ideas leading us to create Victory Parade.  She is currently working as a small animal veterinarian.
+		
+		<p/>  When not in the hospital, she can be found baking, running, or petting dogs.
+		</div>
+
+		<div id="markbio" class="bio" style="display: none;">
+		Dr. Mark Revenaugh, Veterinary Advisor
+		<p/>
+		Dr. Mark Revenaugh is the owner of Northwest Equine Performance. He is a renowned expert in the diagnosis and treatment of lameness and performance issues, attracting clients from all over the world. His fascination with equine medicine and competitive performance began long before opening his specialty clinic in the Oregon.  Dr. Revenaugh has been honored to serve as a Team Veterinarian for the US Equestrian Team. He has helped selecting, treating and advising elite level professionals in the equine industry, maintaining health and maximizing performance.
+
+When not fixing horses, he enjoys outdoor activities like bicycling, camping, and exploring the beautiful pacific northwest with his family.</div>
+
+		<div id="andreybio" class="bio" style="display: none;">
+		Andrey is a software engineer with experience in computer vision and graphics.  After getting a Master's Degree in Computer Science from Worcester Polytechnic Institute Andrey has primarily worked on small teams to develop and deploy vision based systems.  He has worked on human tracking using video, GPS, and RF sensors Sarnoff Corporation.  At Amazon, he prototyped and helped develop, deploy, and support a widely-used package sortation system.  He is excited about tackling the technical challenges of teaching computers how to understand equine movement.
+		
+When not working, Andrey likes to cook, exercise, and be in nature.</div>
+		<div id="ryanbio" class="bio" style="display: none;">
+		Ryan is a recent graduate from the University of Washington with a degree in Electrical Engineering and concentration in Digital Signal Processing. Prior to working at Victory Parade, Ryan interned at Technische Universitat Berlin where he worked on neuro-robotics for stroke patient rehabilitation; and at PhysIQ, a physiology analytics company, where his projects included collection and analyses of wearable sensor data. 
+
+When he is not hunched over his computer, he enjoys painfully long bike rides and nature in all forms - hiking, camping or aimless wandering through Seattle parks.</div>
+	
+	<div id="davidbio" class="bio" style="display: none;">
+	David's career as visionary software architect, business innovator, and author spans more than 30 years. As Chief Technical Officer at Microsoft Corp., he worked to develop a focused and unified strategy and architecture for Microsoft platforms.  He is the founder and CEO of Mylio, a company changing the way the world remembers.  David is an avid equestrian, and has enjoyed jumping and watching his children ride competitively.
+
+<p/>He is an incredible photographer and is most often found on photography treks to some of the most picturesque places in the world.  
+</div></div>
+</div> 
+<div id="contact">
+CONTACT
+<br/>
+You can reach us by emailing info@victoryparade.com
+</div>
+
+
+</div>
+</body>
+
+</html>
