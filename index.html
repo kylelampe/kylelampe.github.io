@@ -23,7 +23,7 @@ $(document).ready(function(){
 		}
 	);
 	$(".teampic").click(
-        function () {
+        function (e) {
         	var id = $(this).attr('id');
         	//Change color behind photo
         	$(".teampic").removeClass("selected");
@@ -33,7 +33,7 @@ $(document).ready(function(){
             $(".bio").hide();
             $("#biobox").show();
             $("#"+id+"bio").show();
-            event.stopPropagation();
+            e.stopPropagation();
             //$("#chooseCompetition").show();
 
             //$("#competition").hide();
