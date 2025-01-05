@@ -1,161 +1,57 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Victory Parade Software</title>
-
-<link rel="stylesheet" type="text/css" href="style.css" />
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script >
-$(document).ready(function(){
-	$(document).scroll(function() {
-    	if( $(this).scrollTop() > 300 ) {$("#topbar").css("opacity", "1");}
-    	else {$("#topbar").css("opacity", '.4');}
- 	});
- 	
-	$(document).click(
-		function(){
-			if ($("biobox").css('display') != 'none') {
-				$("#biobox").hide();
-			}		
-		}
-	);
-	$(".teampic").click(
-        function (e) {
-        	var id = $(this).attr('id');
-        	//Change color behind photo
-        	$(".teampic").removeClass("selected");
-        	$(this).addClass("selected");
-        	//Change out bio text
-        	
-            $(".bio").hide();
-            $("#biobox").show();
-            $("#"+id+"bio").show();
-            e.stopPropagation();
-            //$("#chooseCompetition").show();
-
-            //$("#competition").hide();
-        }
-    );
-    $("#biobox").click(
-    	function () {$(this).hide();}
-    );
-})
-</script>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
 </head>
 <body>
-
-<div id="wrapper">
-<div id="head">
-	<div id="topbar">
-	<div id="topname">Victory Parade</div>
-	<ul>
-		<!--<li>Victory Parade</li>-->
-		<!--<li><a href="#mission">MISSION</a></li>-->
-		<li><a href="#mission">Mission</a></li>
-		<li><a href="#team">Team</a></li>
-		<li><a href="#contact">Contact</a></li>
-	<!-- 	<li><a onclick="swapDiv('boomer')">Boomer</a></li> -->
-	</ul>
-	</div>
-	<img alt="" src="Images/Logo_Original.png">
-		
-</div>
-<div id="mission">
-<h2>Mission:</h2>
-
-Victory Parade's mission is to improve health outcomes for equine athletes by utilizing the latest computer vision and machine learning techniques.
-
-</div>
-<!--
-<div id="inspiration">
-<h2>Our Inspiration:</h2>
-While Rachel was a vet student at the Royal Veterinary College in England, she watched
-100ds of lameness exams, and saw gold standard objective analysis.  force plates.
-fancy qualysis cameras.  She came home and heard bout Kyle an the Kinnect, and envisoned
-a better world for horses, combining their lives.  And thus Victory parade software was formed.
-</div> -->
-<div id="team">
-<h2>The Team:</h2>
-We've assembled an impressive team of computer vision experts, veterinarians, technologists, and investors to help bring about a technological revolution in equine health care.
-<p/>
-In the 1880's Eadweard Muybridge used recent technological advances to answer questions about the gait of a horse at a gallop.  We're doing the same, bringing new insights and ways to analyze equine movement.
-	<div id="teampics">
-	 <div id="kyle" class="teampic selected" >
-		 <img src="Images/kyle.jpg" >
-		 <span class="name">Kyle Lampe</span>
-		 <span class="title">Co-founder, CEO</span>
-	 </div>
-	 <div id="rachel" class="teampic">
-		 <img src="Images/rachel.jpg" >
-		 <span class="name">Dr. Rachel Lampe</span>
-		 <span class="title">Co-founder, Chief Veterinary Officer</span>
-	 </div>
-	 <div id="mark" class="teampic">
-		 <img src="Images/drmark.jpg" >
-		 <span class="name">Dr. Mark Revenaugh</span>
-		 <span class="title">Veterinary advisor</span>
-	 </div>
-	 <div id="david" class="teampic">
-		 <img src="Images/david.png" >
-		 <span class="name">David Vaskevitch</span>
-		 <span class="title">Technical advisor</span>
-	 </div>
-	   
-  </div>
-	<div id="biobox" style="display: none;">	
-		<div id="kylebio" class="bio" >
-		Kyle Lampe, Co-founder and CEO
-<p/>	Kyle is the co-founder and CEO of Victory Parade.  Kyle's software career started early, at the age of 16 interning at Microsoft.  After receiving a degree in physics from Harvey Mudd College, he joined Microsoft full time, and eventually led a team of developers on Windows Mobile.  Feeling the startup itch, he left to lead development teams at Zumobi and SnapIn (which was acquired by Nuance).  Returning to Microsoft, Kyle's work began with 3-d cameras as the lead developer on Kinect Sesame Street TV.  He was also the lead developer for the Xbox video editing and sharing platform Upload Studio.
-<p/>When not working with 3-d cameras and horses, Kyle loves travel, running, and muddy dogs. 
-	</div>
-
-		<div id="rachelbio" class="bio" style="display: none;">
-		Dr. Rachel Lampe, Co-founder and Chief Veterinary Officer
-<p/>		Rachel grew up riding horses and competed nationally on the hunter-jumper show circuit.
-		Her first degree was in computer engineering at Tufts University.  After 5 years
-		working in software, she went back to school to become a veterinarian, at the Royal Veterinary College in London.  Summer research during school involved building a mouse treadmill, and running horses on treadmills, which inspired some of the ideas leading us to create Victory Parade.  She is currently working as a small animal veterinarian.
-		
-		<p/>  When not in the hospital, she can be found baking, running, and petting dogs.
-		</div>
-
-		<div id="markbio" class="bio" style="display: none;">
-		Dr. Mark Revenaugh, Veterinary Advisor
-		<p/>
-		Dr. Mark Revenaugh is the owner of Northwest Equine Performance. He is a renowned expert in the diagnosis and treatment of lameness and performance issues, attracting clients from all over the world. His fascination with equine medicine and competitive performance began long before opening his specialty clinic in the Oregon.  Dr. Revenaugh has been honored to serve as a Team Veterinarian for the US Equestrian Team. He has helped selecting, treating and advising elite level professionals in the equine industry, maintaining health and maximizing performance.
-<p/>
-When not fixing horses, he enjoys outdoor activities like bicycling, camping, and exploring the beautiful pacific northwest with his family.</div>
-
-		<div id="andreybio" class="bio" style="display: none;">
-		Andrey Skylar, Senior Software Developer
-		<p>
-		Andrey is a software engineer with experience in computer vision and graphics.  After getting a Master's Degree in Computer Science from Worcester Polytechnic Institute Andrey has primarily worked on small teams to develop and deploy vision based systems.  He has worked on human tracking using video, GPS, and RF sensors Sarnoff Corporation.  At Amazon, he prototyped and helped develop, deploy, and support a widely-used package sortation system.  He is excited about tackling the technical challenges of teaching computers how to understand equine movement.
-<p/>		
-When not working, Andrey likes to cook, exercise, and be in nature.</div>
-		<div id="ryanbio" class="bio" style="display: none;">
-		Ryan McGinty, Software Developer
-		<p/>Ryan is a recent graduate from the University of Washington with a degree in Electrical Engineering and concentration in Digital Signal Processing. Prior to working at Victory Parade, Ryan interned at Technische Universitat Berlin where he worked on neuro-robotics for stroke patient rehabilitation; and at PhysIQ, a physiology analytics company, where his projects included collection and analyses of wearable sensor data. 
-<p/>
-When he is not hunched over his computer, he enjoys painfully long bike rides and nature in all forms - hiking, camping or aimless wandering through Seattle parks.</div>
-	
-	<div id="davidbio" class="bio" style="display: none;">
-	David Vaskevitch, Technical advisor
-	<p/>	David's career as a visionary software architect, business innovator and author spans more than 35 years, including serving as the Chief Technology Officer at Microsoft.  He is currently the founder of Mylio, a photography startup. Photography has been one David's passions for decades, and he's shot in locales around the world.
-<p/>When not changing the way the world remembers through amazing photography software, David is an avid equestrian. His fondest memories of riding are on the back of Vince.
-
-</div></div>
-</div> 
-<div id="contact">
-CONTACT
-<br/>
-You can reach us by emailing <a href="mailto:info@victoryparade.com">info@victoryparade.com</a>
-</div>
-
-
-</div>
+    <!-- Unicorns, mermaids, then shapes, then trees and unicorns-->
+    <h1>Hello, heart!</h1>
+    <ol>
+        <li>Unicorns and Mermaids</li>
+        <li>Shapes</li>
+        <li>Trees and Unicorns</li>
+        <li>Animals</li>
+        <li>Insects</li>
+    </ol>
+    <div style="position: relative; width: 100%; height: 500px; margin: 20px 0;">
+        <img src="mermaids.webp" alt="Unicorns and Mermaids" style="position: absolute; top: 0; left: 0; width: 200px; height: 200px;">
+        <img src="shapes.webp" alt="Shapes" style="position: absolute; top: 0; right: 0; width: 200px; height: 200px;">
+        <img src="panda.webp" alt="Animals" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 250px; height: 250px;">
+        <img src="trees.webp" alt="Trees and Unicorns" style="position: absolute; bottom: 0; left: 0; width: 200px; height: 200px;">
+        <img src="insects.webp" alt="Insects" style="position: absolute; bottom: 0; right: 0; width: 200px; height: 200px;">
+    </div>
 </body>
-
 </html>
+<style>
+    h1 span:nth-child(1) { color: red; }
+    h1 span:nth-child(2) { color: orange; }
+    h1 span:nth-child(3) { color: yellow; }
+    h1 span:nth-child(4) { color: green; }
+    h1 span:nth-child(5) { color: blue; }
+    h1 span:nth-child(6) { color: indigo; }
+    h1 span:nth-child(7) { color: violet; }
+    h1 span:nth-child(8) { color: red; }
+    h1 span:nth-child(9) { color: orange; }
+    h1 span:nth-child(10) { color: yellow; }
+    h1 span:nth-child(11) { color: green; }
+    h1 span:nth-child(12) { color: blue; }
+    h1 span:nth-child(13) { color: indigo; }
+</style>
+<script>
+    window.onload = function() {
+        const h1 = document.querySelector('h1');
+        const text = h1.textContent;
+        h1.textContent = '';
+        [...text].forEach(letter => {
+            if (letter !== ' ') {
+                const span = document.createElement('span');
+                span.textContent = letter;
+                h1.appendChild(span);
+            } else {
+                h1.appendChild(document.createTextNode(' '));
+            }
+        });
+    };
+</script>
