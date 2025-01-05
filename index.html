@@ -15,6 +15,25 @@
         <li>Animals</li>
         <li>Insects</li>
     </ol>
+    <div>
+        <label for="code">Code:</label>
+        <input type="text" id="code" name="code" oninput="checkCode()">
+        <style>
+            .locked {
+                filter: grayscale(100%);
+            }
+            .lock-overlay {
+                position: absolute;
+                width: 50px;
+                height: 50px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 1;
+                display: none;
+            }
+        </style>
+    </div>
     <div style="position: relative; width: 100%; height: 500px; margin: 20px 0;">
         <img src="mermaids.webp" alt="Unicorns and Mermaids" style="position: absolute; top: 0; left: 0; width: 200px; height: 200px;">
         <img src="shapes.webp" alt="Shapes" style="position: absolute; top: 0; right: 0; width: 200px; height: 200px;">
@@ -22,6 +41,8 @@
         <img src="trees.webp" alt="Trees and Unicorns" style="position: absolute; bottom: 0; left: 0; width: 200px; height: 200px;">
         <img src="insects.webp" alt="Insects" style="position: absolute; bottom: 0; right: 0; width: 200px; height: 200px;">
     </div>
+    <a href="https://www.freepik.com/icons/unlock">Icon by manshagraphics</a>
+    <a href="https://www.freepik.com/search">Icon by Iconic Panda</a>
 </body>
 </html>
 <style>
@@ -53,5 +74,51 @@
                 h1.appendChild(document.createTextNode(' '));
             }
         });
+        const images = document.querySelectorAll('img:not(.lock-overlay)');
+        images.forEach(img => {
+            // Create a wrapper div
+            const wrapper = document.createElement('div');
+            wrapper.style.position = 'absolute';
+            wrapper.style.width = img.style.width;
+            wrapper.style.height = img.style.height;
+            wrapper.style.top = img.style.top;
+            wrapper.style.left = img.style.left;
+            wrapper.style.right = img.style.right;
+            wrapper.style.bottom = img.style.bottom;
+            wrapper.style.transform = img.style.transform;
+            
+            // Move the image into the wrapper
+            img.parentNode.insertBefore(wrapper, img);
+            wrapper.appendChild(img);
+            
+            // Add the lock to the wrapper
+            const lock = document.createElement('img');
+            lock.src = 'lock.png';
+            lock.classList.add('lock-overlay');
+            lock.alt = 'Lock';
+            wrapper.appendChild(lock);
+        });
+
+        checkCode(); // Initial check
+                
     };
+
+    function checkCode() {
+                const code = document.getElementById('code').value;
+                const images = document.querySelectorAll('img:not(.lock-overlay)');
+                images.forEach(img => {
+                    const lock = img.nextElementSibling;
+                    if (code !== 'unlock') {
+                        img.classList.add('locked');
+                        if (lock && lock.classList.contains('lock-overlay')) {
+                            lock.style.display = 'block';
+                        }
+                    } else {
+                        img.classList.remove('locked');
+                        if (lock && lock.classList.contains('lock-overlay')) {
+                            lock.style.display = 'none';
+                        }
+                    }
+                });
+            }
 </script>
