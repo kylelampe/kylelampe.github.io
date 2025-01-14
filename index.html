@@ -162,6 +162,7 @@
     let canvas, ctx;
     let lastX = 0;
     let lastY = 0;
+    let originalImage = null;
 
     window.onload = function() {
         const h1 = document.querySelector('h1');
@@ -271,6 +272,9 @@
             // Draw image on canvas
             ctx.drawImage(img, 0, 0);
             
+            // Store the original image for reset
+            originalImage = img;
+            
             // Setup drawing event listeners
             setupDrawingEvents();
         };
@@ -298,11 +302,10 @@
         });
         
         document.getElementById('clearCanvas').addEventListener('click', () => {
-            const img = new Image();
-            img.onload = function() {
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = canvas.toDataURL();
+            // Clear the entire canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // Redraw the original image
+            ctx.drawImage(originalImage, 0, 0);
         });
         
         document.getElementById('backToGrid').addEventListener('click', () => {
