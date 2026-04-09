@@ -4,21 +4,36 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A personal GitHub Pages site (`kylelampe.github.io`) hosting "Arya's Happy Colouring App" — a single-page coloring book for a child. The user picks a category thumbnail, enters a per-category unlock code, browses a 9-image grid, and draws on a `<canvas>` overlaid on the chosen line-art image.
+A personal GitHub Pages site (`kylelampe.github.io`) hosting "Arya's Happy Colouring App" — a single-page coloring book for a child. The user picks a category thumbnail, enters a per-category unlock code, browses the category's images, and draws on a `<canvas>` overlaid on the chosen line-art image.
 
 ## Architecture
 
-There are two parallel implementations of the same app in this repo, and only one is actually served:
+Vite + vanilla JS modules. No framework. The whole app is ~5 small files in `src/`:
 
-1. **`index.html`** — the live site. A single self-contained file: inline CSS, inline `<script>`, and `<img>` tags that reference `*.webp` assets at the repo root. GitHub Pages serves this directly with no build step. **Edit this file to change the deployed site.**
-2. **`src/`** — an unfinished React port (`App.js`, `components/ColoringApp.js`, `Modal.js`, `DrawingCanvas.js`, `ImageGrid.js`, plus CSS in `src/styles/`). There is no `package.json`, no bundler config, and no `App.css` — these files are not built or served. Treat them as a sketch of an in-progress migration, not running code. If asked to modify behavior, confirm whether the user wants the change in `index.html` (live), `src/` (the port), or both.
+- **`src/main.js`** — entry. Imports the CSS, wires up DOM event handlers on `DOMContentLoaded`, calls into the other modules.
+- **`src/categories.js`** — single source of truth. An array of `{ id, label, code, count, slot }` objects. The `<ol>` listing, the thumbnail gallery, and the per-category image grid all read from this. Adding or renaming a category means editing this file and nothing else.
+- **`src/gallery.js`** — renders the thumbnail picker into `#thumbnails`, manages locked state, and exposes `applyCode(value)` for the unlock-code input.
+- **`src/grid.js`** — renders the per-category image grid into the modal. The number of images shown comes from `category.count`, so the old hardcoded `1..9` loop (which orphaned `_10` and `_11` files on disk) is gone.
+- **`src/canvas.js`** — drawing logic. Uses Pointer Events (not separate mouse/touch listeners) with `setPointerCapture`, and computes coordinates via `getBoundingClientRect()`. The canvas has `touch-action: none` so the browser doesn't scroll/zoom while drawing.
+- **`src/styles.css`** — all CSS, imported by `main.js` so Vite bundles it. Includes a `@media (max-width: 600px)` block that swaps the desktop corner-positioned thumbnail layout for a vertical stack on phones.
 
-## Asset and unlock conventions
+`index.html` is a thin shell: the modal scaffolding, the `<h1>`, an empty `<ol id="categoryList">`, the code input, and an empty `<div id="thumbnails">`. Everything else is rendered by JS.
 
-Category thumbnails live at the repo root as `<category>.webp` (e.g. `mermaids.webp`, `panda.webp`). The 9 images shown in the grid for a category are `<category>_1.webp` through `<category>_9.webp` — the grid loop in `index.html` hardcodes indices 1–9, so adding a 10th image requires bumping the loop bound. Note that some categories have files numbered up to `_11` on disk that are currently unreachable from the UI.
+## Asset conventions
 
-Each thumbnail's unlock code is set via `data-code="..."` on its `<img>` in `index.html` (and duplicated in the `images` array in `src/components/ColoringApp.js`). The literal string `unlock` (case-insensitive) unlocks everything — it's a backdoor, not a bug.
+Static assets live in `public/` (Vite serves it as the site root). Category thumbnails are `<id>.webp` (e.g. `mermaids.webp`); the gallery images are `<id>_1.webp` through `<id>_<count>.webp`. Counts are declared in `src/categories.js` and must match what's on disk. The `lock.png` overlay also lives in `public/`.
+
+The literal unlock code `unlock` (case-insensitive) opens every category — it's a deliberate backdoor, not a bug. Per-category codes are in `src/categories.js`. Since this is client-side, all codes are visible in the bundle; treat them as a soft gate, not security.
 
 ## Development
 
-No build, no tests, no linter. To preview locally, serve the repo root over HTTP (e.g. `python3 -m http.server`) and open `index.html` — opening via `file://` will work for most things but can break canvas image loading due to CORS. Pushing to `master` deploys via GitHub Pages.
+```sh
+npm install         # one-time
+npm run dev         # local dev server with hot reload
+npm run build       # production build into dist/
+npm run preview     # serve the built dist/ locally
+```
+
+There are no tests and no linter.
+
+**Deploy is currently broken.** GitHub Pages serves whatever `index.html` is at the root of `master`, but the post-Vite `index.html` references `/src/main.js` which only resolves through Vite's build/dev pipeline. Pushing to `master` without a build step will publish a non-functional page. The next step is to add a GitHub Actions workflow that runs `npm ci && npm run build` and publishes `dist/` via the Pages action — until that exists, do not push to `master`.
