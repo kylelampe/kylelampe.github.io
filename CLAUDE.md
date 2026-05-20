@@ -36,4 +36,16 @@ npm run preview     # serve the built dist/ locally
 
 There are no tests and no linter.
 
-**Deploy is currently broken.** GitHub Pages serves whatever `index.html` is at the root of `master`, but the post-Vite `index.html` references `/src/main.js` which only resolves through Vite's build/dev pipeline. Pushing to `master` without a build step will publish a non-functional page. The next step is to add a GitHub Actions workflow that runs `npm ci && npm run build` and publishes `dist/` via the Pages action — until that exists, do not push to `master`.
+## Deployment
+
+Production site: `https://happycolouring.ca` — served by Caddy on a VPS (Ubuntu 24.04, IP `51.81.202.68`). Auto-HTTPS via Let's Encrypt (Caddy handles renewal).
+
+Pushing to `master` triggers `.github/workflows/deploy.yml`, which runs `npm ci && npm run build` and `rsync`s `dist/` to `/var/www/arya/` on the VPS over SSH as the `deploy` user. The deploy user's SSH key is restricted via `rrsync -wo /var/www/arya` — it can only write into that directory, no shell, no sudo.
+
+Repo secrets the workflow needs:
+- `DEPLOY_SSH_KEY` — private key for `deploy@happycolouring.ca`
+- `SSH_KNOWN_HOSTS` — host keys for `happycolouring.ca`
+
+Manual SSH access for admin (separate from CI key, full `ubuntu` user with sudo): `ssh arya-vps` (configured in `~/.ssh/config`, key at `~/.ssh/arya_vps`).
+
+GitHub Pages is disabled — the `kylelampe.github.io` URL no longer serves this site.
